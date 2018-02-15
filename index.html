@@ -1,0 +1,211 @@
+<head>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Oswald" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="logo">
+        <div class="logo-img">
+            <img src="dollar-icon.png">
+        </div>
+        <div class="logo-text">
+            Worth it?
+        </div>
+    </div>
+    <div id="active">
+        <div id="item">
+            <div class="item-to-buy-container">
+                <div class="item-to-buy-text">What would you like to buy?</div>
+                <input id="name" class="text-input" type="text">
+            </div>
+
+            <div class="item-to-buy-container">
+                <div class="item-to-buy-text"> How much does it cost?</div>
+                $
+                <input id="cost-input" class="cost-input" type="number">
+            </div>
+
+            <div class="item-to-buy-container">
+                <div class="item-to-buy-text"> How happy will this make you? </div>
+
+                <div class="radio-button-container">
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="1" name="happiness">
+                        <div>Kinda happy</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="2" name="happiness">
+                        <div>Happier than free food</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="3" name="happiness">
+                        <div>Christmas came early</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="4" name="happiness">
+                        <div>I would die of happiness</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item-to-buy-container">
+                <div class="item-to-buy-text"> Is this item useful?</div>
+                <div class="radio-button-container">
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="1" name="usefulness">
+                        <div>I would rarely use it</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="2" name="usefulness">
+                        <div>I could live without it</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="3" name="usefulness">
+                        <div>I would use it several times a week</div>
+                    </div>
+                    <div class="radio-button-text">
+                        <input class="radio-button" type="radio" value="4" name="usefulneess">
+                        <div>I can't live without this</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var imgSrc = 'starbucks.png';
+
+        function starbucks() {
+            var itemRating = {
+                name: document.getElementById("name").value,
+                cost: document.getElementById("cost-input").value,
+            };
+            console.log(itemRating);
+            populateStarbucks(itemRating);
+            populateMcDonalds(itemRating);
+            populateNike(itemRating);
+
+            document.getElementById("item").setAttribute("class", "hidden");
+            document.getElementById("active").appendChild(document.getElementById("analysis-page"));
+            document.getElementById("analysis-page").setAttribute("class", "");
+        }
+
+
+        function generateMcDonaldsImage() {
+            var img = document.createElement('img');
+            img.src = "mcdonalds.png";
+            img.setAttribute("class", "starbucks");
+            return img;
+
+        }
+
+        function generateNikeImage() {
+            var img = document.createElement('img');
+            img.src = "nike.png";
+            img.setAttribute("class", "nike");
+            return img;
+
+        }
+
+        function populateNike(itemRating) {
+            worth = itemRating.cost / 75;
+            var nikeContainer = document.getElementById("nike-container");
+            while (nikeContainer.firstChild) {
+                nikeContainer.removeChild(nikeContainer.firstChild);
+            }
+
+            for (i = 0; i < worth; i++) {
+                nikeContainer.appendChild(generateNikeImage())
+            }
+            var textnode = document.createTextNode("Your item is worth " + worth + " Nike shoes!");
+            var nikeExplanation = document.getElementById("nike-explanation");
+            if (nikeExplanation.childNodes.length == 1) {
+                nikeExplanation.childNodes[0].nodeValue = "Your item is worth " + worth + " large McDonalds fries!";
+            } else {
+                document.getElementById("nike-explanation").appendChild(textnode);
+            }
+
+        }
+
+        function populateMcDonalds(itemRating) {
+            worth = itemRating.cost / 2;
+            var mcdonaldsContainer = document.getElementById("mcdonalds-container");
+            while (mcdonaldsContainer.firstChild) {
+                mcdonaldsContainer.removeChild(mcdonaldsContainer.firstChild);
+            }
+
+            for (i = 0; i < worth; i++) {
+                mcdonaldsContainer.appendChild(generateMcDonaldsImage())
+            }
+            var textnode = document.createTextNode("Your item is worth " + worth + " large McDonalds fries!");
+            var mcdonaldsExplanation = document.getElementById("mcdonalds-explanation");
+            if (mcdonaldsExplanation.childNodes.length == 1) {
+                mcdonaldsExplanation.childNodes[0].nodeValue = "Your item is worth " + worth + " large McDonalds fries!";
+            } else {
+                document.getElementById("mcdonalds-explanation").appendChild(textnode);
+            }
+
+        }
+
+
+        function populateStarbucks(itemRating) {
+            worth = itemRating.cost / 5;
+            var starbucksContainer = document.getElementsByClassName("starbucks-container")[0];
+            while (starbucksContainer.firstChild) {
+                starbucksContainer.removeChild(starbucksContainer.firstChild);
+            }
+
+            for (i = 0; i < worth; i++) {
+                starbucksContainer.appendChild(generateStarbucksImage())
+            }
+            var textnode = document.createTextNode("Your item is worth " + worth + " starbucks drinks!");
+            var starbucksExplanation = document.getElementById("starbucks-explanation");
+            if (starbucksExplanation.childNodes.length == 1) {
+                starbucksExplanation.childNodes[0].nodeValue = "Your item is worth " + worth + " starbucks drinks!";
+            } else {
+                document.getElementById("starbucks-explanation").appendChild(textnode);
+            }
+        }
+
+        function generateStarbucksImage() {
+            console.log("generateimage");
+            var img = document.createElement('img');
+            img.src = imgSrc;
+            img.setAttribute("class", "starbucks");
+            return img;
+        }
+    </script>
+    <button onclick="starbucks()">Perform analysis</button>
+
+    <div id="analysis-page" class="hidden">
+        <div class="description-container">
+            <div id=description>
+                <div style="font-size: 48px; margin: 20px">
+                    Shopping decisions can be tough... so we did the hard math for you!
+                </div>
+
+            </div>
+        </div>
+        <div id="starbucks-wrapper" class="item-to-buy-container">
+            <div class="item-to-buy-text">Your item's worth in Starbucks drinks</div>
+            <div id="starbucks-explanation" class="explanation"></div>
+            <div id="starbucks-container" class="starbucks-container">
+            </div>
+        </div>
+        <div id="mcdonalds-wrapper" class="item-to-buy-container">
+            <div class="item-to-buy-text">Your item's worth in McDonalds fries</div>
+            <div id="mcdonalds-explanation" class="explanation"></div>
+            <div id="mcdonalds-container" class="starbucks-container">
+            </div>
+        </div>
+
+        <div id="nike-wrapper" class="item-to-buy-container">
+            <div class="item-to-buy-text">Your item's worth in Nike shoes</div>
+            <div id="nike-explanation" class="explanation"></div>
+            <div id="nike-container" class="starbucks-container">
+            </div>
+        </div>
+    </div>
+
+</body>
